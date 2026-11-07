@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#050505">
+<meta name="description" content="NOIR / 001. A monochrome digital rain experiment.">
+<title>NOIR / 001 — Enter the System</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+:root{--bg:#050505;--fg:#f5f4f0;--muted:#8d8d8d;--stroke:#333;--panel:rgba(9,9,9,.79);font-synthesis:none}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--fg);font-family:'Space Grotesk',Arial,sans-serif;overflow:hidden;min-height:100vh}button{font:inherit}#matrix{position:fixed;inset:0;width:100%;height:100%;z-index:0;opacity:.79}body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;background:radial-gradient(ellipse 75% 70% at 55% 48%,rgba(0,0,0,.22),rgba(0,0,0,.75));} .grain{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.18;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.89' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E")}
+.frame{min-height:100svh;position:relative;z-index:3;padding:32px clamp(22px,4.5vw,80px);display:flex;flex-direction:column;justify-content:space-between;gap:35px}.top,.bottom{display:flex;justify-content:space-between;align-items:center;gap:16px}.brand{display:flex;align-items:center;gap:13px}.mark{width:31px;height:31px;border:1px solid #c7c7c7;display:grid;place-items:center;font-size:19px;font-weight:500;line-height:1;transform:rotate(0deg)}.brand-name{letter-spacing:.21em;font-size:12px;font-weight:600}.tiny,.top-right,.bottom,.eyebrow,.meta,.control,.hint,.log{font-family:'DM Mono',monospace}.top-right,.bottom,.eyebrow,.meta{font-size:10px;letter-spacing:.16em}.top-right{text-align:right;color:#a8a8a8}.live{display:inline-block;width:5px;height:5px;border-radius:50%;background:#f4f4f4;margin-right:12px;box-shadow:0 0 9px #fff;vertical-align:middle;animation:pulse 2s infinite}
+.content{width:min(1020px,100%);margin:auto;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(220px,.6fr);gap:clamp(25px,7vw,100px);align-items:end}.eyebrow{display:flex;gap:14px;align-items:center;color:#bcbcbc;margin-bottom:22px}.line{height:1px;width:45px;background:#b7b7b7}.headline{font-size:clamp(68px,12vw,165px);line-height:.85;letter-spacing:-.105em;font-weight:500;margin:0 0 23px;text-shadow:0 4px 20px rgba(0,0,0,.3)}.headline em{font-style:normal;color:transparent;-webkit-text-stroke:1px #eeeeee;display:block;margin-left:.07em}.tagline{font-size:clamp(14px,1.6vw,18px);font-weight:300;color:#c7c7c7;letter-spacing:.005em;line-height:1.5;margin:31px 0 0;max-width:460px}.cursor{display:inline-block;width:8px;height:17px;background:#eee;vertical-align:-3px;margin-left:8px;animation:blink 1s steps(1) infinite}
+.side{border-left:1px solid #6a6a6a;padding-left:22px;padding-bottom:4px}.side-head{font-family:'DM Mono',monospace;color:#a5a5a5;letter-spacing:.2em;font-size:10px;margin-bottom:22px}.side-text{font-weight:300;color:#d7d7d7;font-size:15px;line-height:1.65;margin:0 0 27px}.stats{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:0 0 30px}.stats b{font-size:21px;font-weight:400;letter-spacing:-.05em;display:block}.stats span{display:block;font:9px 'DM Mono',monospace;letter-spacing:.08em;color:#aaa;margin-top:8px}.controls{display:flex;flex-direction:column;gap:8px}.control{appearance:none;display:flex;justify-content:space-between;align-items:center;width:100%;background:rgba(17,17,17,.70);border:1px solid #555;padding:15px 14px;color:#e9e9e9;font-size:10px;letter-spacing:.12em;text-align:left;cursor:pointer;transition:border-color .2s,background .2s}.control:hover,.control:focus-visible{background:#262626;border-color:#eee}.arrow{font-size:16px;line-height:0}.bottom{border-top:1px solid #474747;padding-top:20px;color:#9c9c9c}.bottom strong{font-weight:400;color:#eee}.bottom-right{display:flex;gap:22px}.coords{font-variant-numeric:tabular-nums}.mobile{display:none}@keyframes blink{50%{opacity:0}}@keyframes pulse{50%{opacity:.25}}
+@media(max-width:700px){.frame{padding:23px;gap:50px}.content{grid-template-columns:1fr;gap:50px}.headline{font-size:clamp(70px,16vw,130px)}.headline em{margin-top:8px}.side{max-width:450px}.top-right{font-size:9px}.bottom-right{display:none}.mobile{display:inline}.tagline{font-size:14px}.content{margin:8vh auto}}
+@media(max-height:690px) and (min-width:701px){.frame{padding-top:18px;padding-bottom:18px;gap:16px}.content{margin:10px auto}.headline{font-size:clamp(68px,10vw,130px)}.side-text{margin-bottom:15px}.stats{margin-bottom:15px}.tagline{margin-top:15px}}
+@media(prefers-reduced-motion:reduce){.live,.cursor{animation:none}}
+</style>
+</head>
+<body>
+<canvas id="matrix" aria-label="Animated monochrome digital code rain" role="img"></canvas><div class="grain"></div>
+<div class="frame">
+  <header class="top"><div class="brand"><div class="mark" aria-hidden="true">N</div><div class="brand-name">NOIR SYSTEMS</div></div><div class="top-right"><span class="live"></span>SYSTEM ONLINE<br><span style="opacity:.55;line-height:2.5">BUILD 001 / MONOCHROME</span></div></header>
+  <main class="content">
+    <section class="hero"><div class="eyebrow"><span class="line"></span> EXPERIMENT / 001</div><h1 class="headline">ENTER<br><em>THE<br>SYSTEM.</em></h1><p class="tagline">Reality is just another layer of code.<span class="cursor" aria-hidden="true"></span></p></section>
+    <aside class="side"><div class="side-head">// CONTROL PANEL</div><p class="side-text">An experiment in digital atmosphere. No distractions, no noise. Just the signal.</p><div class="stats"><div><b id="streams">000</b><span>ACTIVE STREAMS</span></div><div><b id="fps">60</b><span>FRAME TARGET</span></div></div><div class="controls"><button class="control" id="toggle" aria-label="Pause digital rain">PAUSE SIMULATION <span class="arrow">↗</span></button><button class="control" id="density" aria-label="Change rain density">DENSITY <span id="density-label">NORMAL</span></button><button class="control" id="invert" aria-label="Invert monochrome theme">INVERT THE SIGNAL <span class="arrow">◐</span></button></div></aside>
+  </main>
+  <footer class="bottom"><div>© 2026 <strong>NOIR / 001</strong> <span class="mobile">· DIGITAL RAIN</span></div><div class="bottom-right"><span>DECODE THE ORDINARY.</span><span class="coords" id="clock">00:00:00</span></div><div>BUILT TO DEPLOY <strong>↗</strong></div></footer>
+</div>
+<script>
+(()=>{
+ const canvas=document.querySelector('#matrix'),ctx=canvas.getContext('2d',{alpha:false});
+ const streams=document.querySelector('#streams'),fpsEl=document.querySelector('#fps');
+ let dpr=1,w=0,h=0,size=16,columns=[],density=1,paused=false,inverted=false,last=0,frameMs=55,frames=0,fpsStart=performance.now();
+ const glyphs='01010101011010101010100110011001ABCDEFGHIJKLMNOPQRSTUVWXYZアイウエオカキクケコ';
+ const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ function resize(){dpr=Math.min(window.devicePixelRatio||1,2);w=window.innerWidth;h=window.innerHeight;canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);reset();}
+ function reset(){size=density===.6?23:density===1.5?11:16;columns=Array.from({length:Math.ceil(w/size)},()=>({y:-Math.random()*h,sizeSpeed:.6+Math.random()*.6}));streams.textContent=String(columns.length).padStart(3,'0');ctx.fillStyle=inverted?'#efefed':'#050505';ctx.fillRect(0,0,w,h)}
+ function draw(now){requestAnimationFrame(draw);if(paused||now-last<frameMs)return;last=now;ctx.fillStyle=inverted?'rgba(239,239,237,.07)':'rgba(5,5,5,.072)';ctx.fillRect(0,0,w,h);ctx.font=`${size}px 'DM Mono',monospace`;ctx.textBaseline='top';for(let i=0;i<columns.length;i++){let col=columns[i],char=glyphs[(Math.random()*glyphs.length)|0],x=i*size,y=col.y;let bright=Math.random()>.91;ctx.fillStyle=inverted?(bright?'#090909':'#757575'):(bright?'#ffffff':'#858585');ctx.fillText(char,x,y);col.y+=size*col.sizeSpeed;if(y>h+size*8)col.y=-size*(Math.random()*50+1)}frames++;if(now-fpsStart>1200){fpsEl.textContent=String(Math.round(frames*1000/(now-fpsStart)));frames=0;fpsStart=now}}
+ const button=document.querySelector('#toggle');button.addEventListener('click',()=>{paused=!paused;button.innerHTML=paused?'RESUME SIMULATION <span class="arrow">↗</span>':'PAUSE SIMULATION <span class="arrow">↗</span>';button.setAttribute('aria-label',paused?'Resume digital rain':'Pause digital rain')});
+ document.querySelector('#density').addEventListener('click',()=>{density=density===1?1.5:density===1.5?.6:1;document.querySelector('#density-label').textContent=density===1?'NORMAL':density===1.5?'HIGH':'LOW';reset()});
+ document.querySelector('#invert').addEventListener('click',()=>{inverted=!inverted;document.documentElement.style.setProperty('--bg',inverted?'#efefed':'#050505');document.querySelector('#invert').innerHTML=`${inverted?'RESTORE DARK MODE':'INVERT THE SIGNAL'} <span class="arrow">◐</span>`;reset()});
+ function tick(){document.querySelector('#clock').textContent=new Date().toLocaleTimeString('en-GB',{hour12:false,timeZone:'UTC'})+' UTC'}tick();setInterval(tick,1000);
+ window.addEventListener('resize',resize);resize();if(reduceMotion){paused=true;button.innerHTML='RESUME SIMULATION <span class="arrow">↗</span>';}requestAnimationFrame(draw);
+})();
+</script>
+</body></html>

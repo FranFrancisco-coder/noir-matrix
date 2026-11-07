@@ -1,0 +1,12 @@
+{
+  "name": "matrix-rain-deployment",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Matrix-style digital rain deployed from GitHub to Railway",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
