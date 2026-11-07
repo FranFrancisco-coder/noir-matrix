@@ -3,7 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const port = Number(process.env.PORT || 3000);
-const html = path.join(__dirname, 'public', 'index.html');
+const html = path.join(__dirname, 'index.html');
 
 http.createServer((req, res) => {
   if (req.url === '/health') {
